@@ -1,27 +1,27 @@
-Feta
+# Feta
  
-1. Main screen (start, leaderboard, (controls), login(username, password))
-2. assets
-3. miiš běží doprava na podlaze, vyhýbá se překážkám, dostává body za uraženou vzdálenost, postupně se zrychluje a papá fetu (power up)
-4. prostředí kanál, 3 úrovně (výška)
-5. leaderboard v db
+## 1. Main screen (start, leaderboard, (controls), login(username, password))
+## 2. assets
+## 3. miiš běží doprava na podlaze, vyhýbá se překážkám, dostává body za uraženou vzdálenost, postupně se zrychluje a papá fetu (power up)
+## 4. prostředí kanál, 3 úrovně (výška)
+## 5. leaderboard v db
  
-překážky
+# překážky
 
-pavouk, větší krisa, crates, kostra, průtok "vody", platformy, prkno na chainech atd
+## pavouk, větší krisa, crates, kostra, průtok "vody", platformy, prkno na chainech atd
 
-mechaniky
+# mechaniky
 
-jump, aktivace fety, dash (na větší vzdálenost)
+## jump, aktivace fety, dash (na větší vzdálenost)
 
-Progression
+# Progression
 
-1. assets
-	a) player
-	b) prekazky, feta
-	c) background
-2. movement (mechaniky)
-3. prostředí (progression) + score, high score
-4. překážky
-5. main screen + db
-6. metadata (SEO)
+## 1. assets
+### a) player
+### b) prekazky, feta
+### c) background
+## 2. movement (mechaniky)
+## 3. prostředí (progression) + score, high score
+## 4. překážky
+## 5. main screen + db
+## 6. metadata (SEO)
