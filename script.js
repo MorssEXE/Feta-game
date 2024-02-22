@@ -1,5 +1,5 @@
 import { setupGround, updateGround } from "./ground.js"
-import { updateMis, setupMis } from "./mis.js"
+import { updateMis, setupMis } from "./player.js"
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
