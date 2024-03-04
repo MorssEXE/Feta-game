@@ -1,6 +1,6 @@
 import { setupGround, updateGround } from "./ground.js"
-import { updatePlatform, setupPlatform } from "./platform.js"
-import { updateMis, setupMis } from "./player.js"
+import { updatePlatform, setupPlatform, getPlatformRects } from "./platform.js"
+import { updateMis, setupMis, getMisRect, setMisLose } from "./player.js"
 
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
@@ -31,9 +31,19 @@ function update(time) {
     updatePlatform(delta, speedScale)
     updateSpeedScale(delta)
     updateScore(delta)
+    if (checkLose()) return handleLose()
 
     lastTime = time;
     window.requestAnimationFrame(update)
+}
+
+function isCollision(rect1, rect2) {
+    return  (rect1.left < rect2.right && rect1.top < rect2.bottom && rect1.right > rect2.left && rect1.bottom > rect2.top)
+}
+
+function checkLose() {
+    const misRect = getMisRect()
+    return getPlatformRects().some(rect => isCollision(rect, misRect))
 }
 
 function updateSpeedScale(delta) {
@@ -54,6 +64,14 @@ function handleStart() {
     setupPlatform()
     startScreenElement.classList.add("hide")
     window.requestAnimationFrame(update)
+}
+
+function handleLose() {
+    setMisLose()
+    setTimeout(() => {
+        document.addEventListener("keydown", handleStart, { once: true })
+        startScreenElement.classList.remove("hide")
+    }, 100)
 }
 
 function setPixelToWorldScale() {
