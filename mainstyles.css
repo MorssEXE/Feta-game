@@ -12,6 +12,7 @@ body {
   align-items: center;
   min-height: 100vh;
   text-align: center;
+  font-family: Verdana, sans-serif;
 }
 
 input[type="text"] {
