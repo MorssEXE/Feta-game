@@ -13,7 +13,6 @@ export function setupPlatform() {
         platform.remove()
     })
 }
-
 export function updatePlatform(delta, speedScale) {
     document.querySelectorAll("[data-platform]").forEach(platform => {
         incrementCustomProperty(platform, "--left", delta * speedScale * SPEED * -1)
