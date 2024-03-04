@@ -31,18 +31,18 @@ export function getMisRect() {
 }
 
 export function setMisLose() {
-    misElement.src = "src/feta.webp"
+    misElement.src = "src/idle.png"
 }
 
 function handleRun(delta, speedScale) {
     if (isJumping) {
-        misElement.src = `src/miiis.webp`
+        misElement.src = `src/idle.png`
         return
     }
 
     if (currentFrameTime > FRAME_TIME) {
         misFrame = (misElement + 1) % MIS_FRAME_COUNT
-        misElement.src = `src/miiis.webp` // pozdeji zmenit na src/miiis-run-${misFrame}
+        misElement.src = `src/idle.png` // pozdeji zmenit na src/miiis-run-${misFrame}
         currentFrameTime -= FRAME_TIME
     }
     currentFrameTime += delta * speedScale
