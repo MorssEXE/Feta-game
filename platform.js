@@ -38,7 +38,7 @@ export function getPlatformRects() {
 function createPlatform() {
     const platform = document.createElement("img")
     platform.dataset.platform = true
-    platform.src = "src/idle.png"
+    platform.src = "src/mis-idle.png"
     platform.classList.add("platform")
     setCustomProperty(platform, "--left", 100)
     worldElement.append(platform)
