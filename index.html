@@ -3,22 +3,27 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feta | Game</title>
-    <link rel="icon" href="src/feta.png" type="image/png">
-    <link rel="stylesheet" href="styles.css" type="text/css">
-    <script src="script.js" type="module"></script>
+    <title>Feta | Main</title>
+    <link rel="stylesheet" href="mainstyles.css">
+</head>
 </head>
 
 <body>
-    <div class="world" data-world>
-        <div class="score" data-score>0</div>
-        <div class="start-screen" data-start-screen>Press Any Key To Start</div>
-        <img src="src/ground.png" class="ground" data-ground>
-        <img src="src/ground.png" class="ground" data-ground>
-        <img src="src/mis-idle.png" class="mis" data-mis>
+    <div id="container">
+        <h1>Feta</h1>
+        <form id="nicknameForm" action="connect.php" method="post">
+            <input type="text" name="nickname" placeholder="Enter your nickname" required><br>
+            <button type="button" onclick="submitFormAndRedirect()">Eat FETA!</button>
+        </form>
+        <a href="leaderboard.html"><button>LEADERBOARD</button></a>
     </div>
+    <script>
+        function submitFormAndRedirect() {
+            document.getElementById('nicknameForm').submit();
+            window.location.href = "game.html";
+        }
+    </script>
 </body>
 
 </html>
