@@ -1,8 +1,8 @@
 import { setCustomProperty, getCustomProperty, incrementCustomProperty } from "./updateCustomProperty.js"
 
 const SPEED = 0.05
-const PLATFORM_INTERVAL_MIN = 500
-const PLATFORM_INTERVAL_MAX = 2000
+const PLATFORM_INTERVAL_MIN = 700
+const PLATFORM_INTERVAL_MAX = 2500
 const worldElement = document.querySelector("[data-world]")
 
 let nextPlatformTime
@@ -38,7 +38,7 @@ export function getPlatformRects() {
 function createPlatform() {
     const platform = document.createElement("img")
     platform.dataset.platform = true
-    platform.src = "src/mis-idle.png"
+    platform.src = "src/obstacle.png"
     platform.classList.add("platform")
     setCustomProperty(platform, "--left", 100)
     worldElement.append(platform)

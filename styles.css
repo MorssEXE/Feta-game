@@ -62,6 +62,6 @@ img {
 .platform {
   position: absolute;
   left: calc(var(--left) * 1%);
-  height: 20%;
+  height: 30%;
   bottom: 0;
 }
