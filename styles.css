@@ -13,6 +13,10 @@ body {
   min-height: 100vh;
 }
 
+img {
+  pointer-events: none;
+}
+
 .world {
   overflow: hidden;
   position: relative;
@@ -48,13 +52,13 @@ body {
   --bottom: 0;
   position: absolute;
   left: 1%;
-  height: 30%;
+  height: 25%;
   bottom: calc(var(--bottom) * 1%);
 }
 
 .platform {
   position: absolute;
   left: calc(var(--left) * 1%);
-  height: 30%;
+  height: 20%;
   bottom: 0;
 }
