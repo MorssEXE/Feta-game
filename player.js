@@ -1,13 +1,13 @@
 import { getCustomProperty, incrementCustomProperty, setCustomProperty } from "./updateCustomProperty.js"
 
 const misElement = document.querySelector('[data-mis]')
-const JUMP_SPEED = .45
-const GRAVITY = .0015
-const MIS_FRAME_COUNT = 1 // pozdeji zmenit podle poctu frame pro mis
+const JUMP_SPEED = .43
+const GRAVITY = .0013
+const MIS_FRAME_COUNT = 2 // pozdeji zmenit podle poctu frame pro mis
 const FRAME_TIME = 100
 
 let isJumping
-let misFrame
+let misFrame = 1
 let currentFrameTime
 let yVelocity
 
@@ -31,18 +31,18 @@ export function getMisRect() {
 }
 
 export function setMisLose() {
-    misElement.src = "src/idle.png"
+    misElement.src = "src/mis-death.png"
 }
 
 function handleRun(delta, speedScale) {
     if (isJumping) {
-        misElement.src = `src/idle.png`
+        misElement.src = `src/mis-idle.png`
         return
     }
 
-    if (currentFrameTime > FRAME_TIME) {
-        misFrame = (misElement + 1) % MIS_FRAME_COUNT
-        misElement.src = `src/idle.png` // pozdeji zmenit na src/miiis-run-${misFrame}
+    if (currentFrameTime >= FRAME_TIME) {
+        misFrame = (misFrame + 1) % MIS_FRAME_COUNT
+        misElement.src = `src/mis-run-${misFrame}.png` // pozdeji zmenit na src/miiis-run-${misFrame}
         currentFrameTime -= FRAME_TIME
     }
     currentFrameTime += delta * speedScale
@@ -52,7 +52,7 @@ function handleJump(delta) {
     if (!isJumping) return
 
     incrementCustomProperty(misElement, "--bottom", yVelocity * delta)
-    
+    misElement.src = `src/mis-jump.png`
     if (getCustomProperty(misElement, "--bottom") <= 0) {
         setCustomProperty(misElement, "--bottom", 0)
         isJumping = false
