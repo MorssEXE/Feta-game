@@ -1,4 +1,5 @@
 import { setupGround, updateGround } from "./ground.js"
+import { updatePlatform, setupPlatform } from "./platform.js"
 import { updateMis, setupMis } from "./player.js"
 
 const WORLD_WIDTH = 100
@@ -27,6 +28,7 @@ function update(time) {
 
     updateGround(delta, speedScale)
     updateMis(delta, speedScale)
+    updatePlatform(delta, speedScale)
     updateSpeedScale(delta)
     updateScore(delta)
 
@@ -49,6 +51,7 @@ function handleStart() {
     score = 0
     setupGround()
     setupMis()
+    setupPlatform()
     startScreenElement.classList.add("hide")
     window.requestAnimationFrame(update)
 }
