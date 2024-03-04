@@ -26,6 +26,14 @@ export function updateMis(delta, speedScale) {
     handleJump(delta)
 }
 
+export function getMisRect() {
+    return misElement.getBoundingClientRect()
+}
+
+export function setMisLose() {
+    misElement.src = "src/feta.webp"
+}
+
 function handleRun(delta, speedScale) {
     if (isJumping) {
         misElement.src = `src/miiis.webp`
