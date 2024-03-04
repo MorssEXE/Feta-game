@@ -11,6 +11,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  /* background-image: url("src/sewer.jpg");
+  background-size: cover; */
 }
 
 img {
