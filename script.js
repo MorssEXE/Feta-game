@@ -2,7 +2,7 @@ import { setupGround, updateGround } from "./ground.js"
 import { updatePlatform, setupPlatform, getPlatformRects } from "./platform.js"
 import { updateMis, setupMis, getMisRect, setMisLose } from "./player.js"
 
-const WORLD_WIDTH = 100
+const WORLD_WIDTH = 120
 const WORLD_HEIGHT = 30
 const SPEED_SCALE_INCREASE = 0.00001
 
@@ -14,6 +14,7 @@ setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
 document.addEventListener("keydown", handleStart, {once: true})
 document.addEventListener("touchstart", handleStart, {once: true})
+document.addEventListener("click", handleStart, {once: true})
 
 let lastTime
 let speedScale
@@ -72,6 +73,8 @@ function handleLose() {
     setTimeout(() => {
         document.addEventListener("keydown", handleStart, { once: true })
         document.addEventListener("touchstart", handleStart, { once: true })
+        document.addEventListener("click", handleStart, {once: true})
+
         startScreenElement.classList.remove("hide")
     }, 100)
 }

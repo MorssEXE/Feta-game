@@ -24,7 +24,7 @@ export function updatePlatform(delta, speedScale) {
     
     if (nextPlatformTime <= 0) {
         createPlatform()
-        nextPlatformTime = randomNumberBetween(PLATFORM_INTERVAL_MIN, PLATFORM_INTERVAL_MAX) / speedScale
+        nextPlatformTime = randomNumberBetween(PLATFORM_INTERVAL_MIN, PLATFORM_INTERVAL_MAX) / speedScale - SPEED
     }
     nextPlatformTime -= delta
 }

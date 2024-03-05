@@ -19,8 +19,10 @@ export function setupMis() {
     setCustomProperty(misElement, "--bottom", 0)
     document.removeEventListener("keydown", onJump)
     document.addEventListener("keydown", onJump)
-    document.removeEventListener("keydown", onTouchJump)
-    document.addEventListener("touchstart", onTouchJump)
+    document.removeEventListener("keydown", onOtherJump)
+    document.addEventListener("touchstart", onOtherJump)
+    document.removeEventListener("click", onOtherJump)
+    document.addEventListener("click", onOtherJump)
 }
 
 export function updateMis(delta, speedScale) {
@@ -70,7 +72,7 @@ function onJump(e) {
     isJumping = true
 }
 
-function onTouchJump() {
+function onOtherJump() {
     if (isJumping) return
 
     yVelocity = JUMP_SPEED
