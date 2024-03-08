@@ -21,8 +21,6 @@ export function setupMis() {
     document.addEventListener("keydown", onJump)
     document.removeEventListener("touchstart", onOtherJump)
     document.addEventListener("touchstart", onOtherJump)
-    document.removeEventListener("mousedown", onOtherJump)
-    document.addEventListener("mousedown", onOtherJump)
 }
 
 export function updateMis(delta, speedScale) {
