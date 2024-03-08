@@ -19,10 +19,10 @@ export function setupMis() {
     setCustomProperty(misElement, "--bottom", 0)
     document.removeEventListener("keydown", onJump)
     document.addEventListener("keydown", onJump)
-    document.removeEventListener("keydown", onOtherJump)
+    document.removeEventListener("touchstart", onOtherJump)
     document.addEventListener("touchstart", onOtherJump)
-    document.removeEventListener("click", onOtherJump)
-    document.addEventListener("click", onOtherJump)
+    document.removeEventListener("mousedown", onOtherJump)
+    document.addEventListener("mousedown", onOtherJump)
 }
 
 export function updateMis(delta, speedScale) {

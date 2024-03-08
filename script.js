@@ -14,7 +14,6 @@ setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
 document.addEventListener("keydown", handleStart, {once: true})
 document.addEventListener("touchstart", handleStart, {once: true})
-document.addEventListener("click", handleStart, {once: true})
 
 let lastTime
 let speedScale
@@ -73,7 +72,6 @@ function handleLose() {
     setTimeout(() => {
         document.addEventListener("keydown", handleStart, { once: true })
         document.addEventListener("touchstart", handleStart, { once: true })
-        document.addEventListener("click", handleStart, {once: true})
 
         startScreenElement.classList.remove("hide")
     }, 100)
