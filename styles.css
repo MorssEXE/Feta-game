@@ -70,5 +70,5 @@ img {
   position: absolute;
   left: calc(var(--left) * 1%);
   height: 15%;
-  bottom: 20;
+  bottom: 15;
 }

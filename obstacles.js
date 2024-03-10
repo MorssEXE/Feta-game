@@ -1,47 +1,70 @@
 import { setCustomProperty, getCustomProperty, incrementCustomProperty } from "./updateCustomProperty.js"
 
-const SPEED = 0.05
-const SKULL_INTERVAL_MIN = 700
-const SKULL_INTERVAL_MAX = 2500
+const OBSTACLES = {
+    skull: {
+        speed: 0.05,
+        intervalMin: 700,
+        intervalMax: 2500,
+        image: "src/obstacle.png",
+        cssClass: "skull"
+    },
+    bat: {
+        speed: 0.08,
+        intervalMin: 1000,
+        intervalMax: 5000,
+        image: "src/bat-fly-3.png",
+        cssClass: "bat"
+    }
+}
 const worldElement = document.querySelector("[data-world]")
 
-let nextSkullTime
+let nextObstacleTimeSkull
+let nextObstacleTimeBat
 
-export function setupSkull() {
-    nextSkullTime = SKULL_INTERVAL_MIN
-    document.querySelectorAll("[data-skull]").forEach(skull => {
-        skull.remove()
+export function setupObstacles() {
+    nextObstacleTimeSkull = OBSTACLES.skull.intervalMin
+    nextObstacleTimeBat = OBSTACLES.bat.intervalMin
+    document.querySelectorAll("[data-obstacle]").forEach(obstacle => {
+        obstacle.remove()
     })
 }
 
-export function updateSkull(delta, speedScale) {
-     document.querySelectorAll("[data-skull]").forEach(skull => {
-        incrementCustomProperty(skull, "--left", delta * speedScale * SPEED * -1)
-        if (getCustomProperty(skull, "--left") <= -100) {
-            skull.remove()
+export function updateObstacles(delta, speedScale) {
+    document.querySelectorAll("[data-obstacle]").forEach(obstacle => {
+        const obstacleType = obstacle.dataset.obstacleType
+        incrementCustomProperty(obstacle, "--left", delta * speedScale * OBSTACLES[obstacleType].speed * -1)
+        if (getCustomProperty(obstacle, "--left") <= -100) {
+            obstacle.remove()
         }
     })
-    
-    if (nextSkullTime <= 0) {
-        createSkull()
-        nextSkullTime = randomNumberBetween(SKULL_INTERVAL_MIN, SKULL_INTERVAL_MAX) / speedScale - SPEED
+
+    if (nextObstacleTimeSkull <= 0 || nextObstacleTimeBat <= 0) {
+        createRandomObstacle()
+        nextObstacleTimeSkull = randomNumberBetween(OBSTACLES.skull.intervalMin, OBSTACLES.skull.intervalMax) / speedScale - OBSTACLES.skull.speed
+        nextObstacleTimeBat = randomNumberBetween(OBSTACLES.bat.intervalMin, OBSTACLES.bat.intervalMax) / speedScale - OBSTACLES.bat.speed
     }
-    nextSkullTime -= delta
+    nextObstacleTimeSkull -= delta
+    nextObstacleTimeBat -= delta
 }
 
-export function getSkullRects() {
-    return [...document.querySelectorAll("[data-skull]")].map(skull => {
-        return skull.getBoundingClientRect()
+export function getObstacleRects() {
+    return [...document.querySelectorAll("[data-obstacle]")].map(obstacle => {
+        return obstacle.getBoundingClientRect()
     })
 }
 
-function createSkull() {
-    const skull = document.createElement("img")
-    skull.dataset.skull = true
-    skull.src = "src/obstacle.png"
-    skull.classList.add("skull")
-    setCustomProperty(skull, "--left", 100)
-    worldElement.append(skull)
+function createRandomObstacle() {
+    const obstacleTypes = Object.keys(OBSTACLES)
+    const randomIndex = Math.floor(Math.random() * obstacleTypes.length)
+    const randomObstacleType = obstacleTypes[randomIndex]
+
+    const obstacle = document.createElement("img")
+    obstacle.dataset.obstacle = true
+    obstacle.dataset.obstacleType = randomObstacleType
+    obstacle.src = OBSTACLES[randomObstacleType].image
+    obstacle.classList.add(OBSTACLES[randomObstacleType].cssClass)
+    setCustomProperty(obstacle, "--left", 100)
+    worldElement.append(obstacle)
 }
 
 function randomNumberBetween(min, max) {
