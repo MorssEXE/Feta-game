@@ -1,5 +1,5 @@
 import { setupGround, updateGround } from "./ground.js"
-import { updatePlatform, setupPlatform, getPlatformRects } from "./platform.js"
+import { updateSkull, setupSkull, getSkullRects } from "./obstacles.js"
 import { updateMis, setupMis, getMisRect, setMisLose } from "./player.js"
 
 const WORLD_WIDTH = 120
@@ -29,7 +29,7 @@ function update(time) {
 
     updateGround(delta, speedScale)
     updateMis(delta, speedScale)
-    updatePlatform(delta, speedScale)
+    updateSkull(delta, speedScale)
     updateSpeedScale(delta)
     updateScore(delta)
     if (checkLose()) return handleLose()
@@ -44,7 +44,7 @@ function isCollision(rect1, rect2) {
 
 function checkLose() {
     const misRect = getMisRect()
-    return getPlatformRects().some(rect => isCollision(rect, misRect))
+    return getSkullRects().some(rect => isCollision(rect, misRect))
 }
 
 function updateSpeedScale(delta) {
@@ -62,7 +62,7 @@ function handleStart() {
     score = 0
     setupGround()
     setupMis()
-    setupPlatform()
+    setupSkull()
     startScreenElement.classList.add("hide")
     window.requestAnimationFrame(update)
 }

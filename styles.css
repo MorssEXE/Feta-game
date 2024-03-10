@@ -59,7 +59,7 @@ img {
   bottom: calc(var(--bottom) * 1%);
 }
 
-.platform {
+.skull {
   position: absolute;
   left: calc(var(--left) * 1%);
   height: 30%;
