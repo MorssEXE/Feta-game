@@ -65,3 +65,10 @@ img {
   height: 30%;
   bottom: 0;
 }
+
+.bat {
+  position: absolute;
+  left: calc(var(--left) * 1%);
+  height: 15%;
+  bottom: 20;
+}
