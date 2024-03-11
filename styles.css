@@ -70,5 +70,12 @@ img {
   position: absolute;
   left: calc(var(--left) * 1%);
   height: 15%;
-  bottom: 15;
+  bottom: 40%;
+}
+
+.spider {
+  position: absolute;
+  left: calc(var(--left) * 1%);
+  height: 20%;
+  bottom: 70%;
 }

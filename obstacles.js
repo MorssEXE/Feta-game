@@ -9,11 +9,18 @@ const OBSTACLES = {
         cssClass: "skull"
     },
     bat: {
-        speed: 0.08,
-        intervalMin: 1000,
+        speed: 0.07,
+        intervalMin: 2500,
         intervalMax: 5000,
         image: "src/bat-fly-3.png",
         cssClass: "bat"
+    },
+    spider: {
+        speed: 0.045,
+        intervalMin: 2500,
+        intervalMax: 5000,
+        image: "src/obstacle.png",
+        cssClass: "spider"
     }
 }
 const worldElement = document.querySelector("[data-world]")

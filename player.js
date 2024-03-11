@@ -17,8 +17,8 @@ export function setupMis() {
     currentFrameTime = 0
     yVelocity = 0
     setCustomProperty(misElement, "--bottom", 0)
-    document.removeEventListener("keydown", onJump)
-    document.addEventListener("keydown", onJump)
+    document.removeEventListener("mousedown", onJump)
+    document.addEventListener("mousedown", onJump)
     document.removeEventListener("touchstart", onOtherJump)
     document.addEventListener("touchstart", onOtherJump)
 }
