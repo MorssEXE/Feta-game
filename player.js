@@ -19,8 +19,8 @@ export function setupMis() {
     setCustomProperty(misElement, "--bottom", 0)
     document.removeEventListener("mousedown", onJump)
     document.addEventListener("mousedown", onJump)
-    document.removeEventListener("touchstart", onOtherJump)
-    document.addEventListener("touchstart", onOtherJump)
+    document.removeEventListener("touchstart", onJump)
+    document.addEventListener("touchstart", onJump)
 }
 
 export function updateMis(delta, speedScale) {
@@ -63,14 +63,7 @@ function handleJump(delta) {
     yVelocity -= GRAVITY * delta
 }
 
-function onJump(e) {
-    if (e.code !== "Space" || isJumping) return
-
-    yVelocity = JUMP_SPEED
-    isJumping = true
-}
-
-function onOtherJump() {
+function onJump() {
     if (isJumping) return
 
     yVelocity = JUMP_SPEED

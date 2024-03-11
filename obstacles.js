@@ -27,6 +27,7 @@ const worldElement = document.querySelector("[data-world]")
 
 let nextObstacleTimeSkull
 let nextObstacleTimeBat
+let nextObstacleTimeSpider
 
 export function setupObstacles() {
     nextObstacleTimeSkull = OBSTACLES.skull.intervalMin
@@ -49,9 +50,11 @@ export function updateObstacles(delta, speedScale) {
         createRandomObstacle()
         nextObstacleTimeSkull = randomNumberBetween(OBSTACLES.skull.intervalMin, OBSTACLES.skull.intervalMax) / speedScale - OBSTACLES.skull.speed
         nextObstacleTimeBat = randomNumberBetween(OBSTACLES.bat.intervalMin, OBSTACLES.bat.intervalMax) / speedScale - OBSTACLES.bat.speed
+        nextObstacleTimeSpider = randomNumberBetween(OBSTACLES.spider.intervalMin, OBSTACLES.spider.intervalMax) / speedScale - OBSTACLES.spider.speed
     }
     nextObstacleTimeSkull -= delta
     nextObstacleTimeBat -= delta
+    nextObstacleTimeSpider -= delta
 }
 
 export function getObstacleRects() {
