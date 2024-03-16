@@ -29,15 +29,9 @@ let nextObstacleTimeSkull
 let nextObstacleTimeBat
 let nextObstacleTimeSpider
 
-let batFrame = 0
-let batFrameTime = 0
-const BAT_FRAME_COUNT = 3
-const BAT_FRAME_TIME = 130
-
 export function setupObstacles() {
     nextObstacleTimeSkull = OBSTACLES.skull.intervalMin
     nextObstacleTimeBat = OBSTACLES.bat.intervalMin
-    nextObstacleTimeSpider = OBSTACLES.spider.intervalMin
     document.querySelectorAll("[data-obstacle]").forEach(obstacle => {
         obstacle.remove()
     })
@@ -45,31 +39,22 @@ export function setupObstacles() {
 
 export function updateObstacles(delta, speedScale) {
     document.querySelectorAll("[data-obstacle]").forEach(obstacle => {
-        const obstacleType = obstacle.dataset.obstacleType;
-        incrementCustomProperty(obstacle, "--left", delta * speedScale * OBSTACLES[obstacleType].speed * -1);
+        const obstacleType = obstacle.dataset.obstacleType
+        incrementCustomProperty(obstacle, "--left", delta * speedScale * OBSTACLES[obstacleType].speed * -1)
         if (getCustomProperty(obstacle, "--left") <= -100) {
-            obstacle.remove();
+            obstacle.remove()
         }
-    });
-
-    // Update bat's frame
-    batFrameTime += delta * speedScale;
-    if (batFrameTime >= BAT_FRAME_TIME) {
-        batFrame = (batFrame % BAT_FRAME_COUNT) + 1; // Cycle through bat frames
-        batFrameTime -= BAT_FRAME_TIME;
-        const batElement = document.querySelector(".bat"); // Assuming there's only one bat element in the DOM
-        if (batElement) {
-            batElement.src = `src/bat-fly-${batFrame}.png`;
-        }
-    }
+    })
 
     if (nextObstacleTimeSkull <= 0 || nextObstacleTimeBat <= 0) {
-        createRandomObstacle();
-        // Your logic for updating obstacle creation time here...
+        createRandomObstacle()
+        nextObstacleTimeSkull = randomNumberBetween(OBSTACLES.skull.intervalMin, OBSTACLES.skull.intervalMax) / speedScale - OBSTACLES.skull.speed
+        nextObstacleTimeBat = randomNumberBetween(OBSTACLES.bat.intervalMin, OBSTACLES.bat.intervalMax) / speedScale - OBSTACLES.bat.speed
+        nextObstacleTimeSpider = randomNumberBetween(OBSTACLES.spider.intervalMin, OBSTACLES.spider.intervalMax) / speedScale - OBSTACLES.spider.speed
     }
-    nextObstacleTimeSkull -= delta;
-    nextObstacleTimeBat -= delta;
-    nextObstacleTimeSpider -= delta;
+    nextObstacleTimeSkull -= delta
+    nextObstacleTimeBat -= delta
+    nextObstacleTimeSpider -= delta
 }
 
 export function getObstacleRects() {
