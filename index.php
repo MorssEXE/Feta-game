@@ -38,6 +38,7 @@ $conn->close();
             <input type="text" name="nickname" placeholder="Enter your nickname" required><br>
             <a href="index.html"><button type="submit">Eat FETA!</button></a>
         </form>
+        <a href="game.html"><button>Eat FETA</button></a>
         <a href="leaderboard.html"><button>LEADERBOARD</button></a>
     </div>
 </body>
