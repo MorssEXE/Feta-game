@@ -3,8 +3,8 @@ import { setCustomProperty, getCustomProperty, incrementCustomProperty } from ".
 const OBSTACLES = {
     skull: {
         speed: 0.05,
-        intervalMin: 700,
-        intervalMax: 2500,
+        intervalMin: 800,
+        intervalMax: 2000,
         image: "src/obstacle.png",
         cssClass: "skull"
     },

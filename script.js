@@ -29,7 +29,7 @@ function update(time) {
 
     updateGround(delta, speedScale)
     updateMis(delta, speedScale)
-    updateObstacles(delta, speedScale) // Updated function call
+    updateObstacles(delta, speedScale)
     updateSpeedScale(delta)
     updateScore(delta)
     if (checkLose()) return handleLose()
@@ -44,7 +44,7 @@ function isCollision(rect1, rect2) {
 
 function checkLose() {
     const misRect = getMisRect()
-    return getObstacleRects().some(rect => isCollision(rect, misRect)) // Updated function call
+    return getObstacleRects().some(rect => isCollision(rect, misRect))
 }
 
 function updateSpeedScale(delta) {
@@ -62,7 +62,7 @@ function handleStart() {
     score = 0
     setupGround()
     setupMis()
-    setupObstacles() // Updated function call
+    setupObstacles()
     startScreenElement.classList.add("hide")
     window.requestAnimationFrame(update)
 }
@@ -72,7 +72,6 @@ function handleLose() {
     setTimeout(() => {
         document.addEventListener("mousedown", handleStart, { once: true })
         document.addEventListener("touchstart", handleStart, { once: true })
-
         startScreenElement.classList.remove("hide")
     }, 100)
 }
