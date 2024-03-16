@@ -18,6 +18,7 @@ document.addEventListener("touchstart", handleStart, {once: true})
 let lastTime
 let speedScale
 let score
+let highScore
 
 function update(time) {
     if (lastTime == null) {
@@ -69,6 +70,22 @@ function handleStart() {
 
 function handleLose() {
     setMisLose()
+    highScore = Math.floor(score)
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", "index.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                console.log(xhr.responseText);
+            } else {
+                console.error('Error:', xhr.status);
+            }
+        }
+    };
+    xhr.send("highScore=" + highScore);
+
     setTimeout(() => {
         document.addEventListener("mousedown", handleStart, { once: true })
         document.addEventListener("touchstart", handleStart, { once: true })
