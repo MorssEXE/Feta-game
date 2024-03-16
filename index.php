@@ -11,8 +11,9 @@ if ($conn->connect_error) {
 }
 
 $nickname = $_POST['nickname'];
+$highScore = $_POST['highScore'];
 
-$sql = "INSERT INTO users (nickname) VALUES ('$nickname')";
+$sql = "INSERT INTO users (nickname,highScore) VALUES ('$nickname','$highScore')";
 
 if ($conn->query($sql) === TRUE) {
 }
@@ -36,10 +37,10 @@ $conn->close();
         <h1>Feta</h1>
         <form id="nicknameForm" method="post">
             <input type="text" name="nickname" placeholder="Enter your nickname" required><br>
-            <a href="index.html"><button type="submit">Eat FETA!</button></a>
+            <a href="index.html"><button type="submit">Submit!</button></a>
         </form>
         <a href="game.html"><button>Eat FETA</button></a>
-        <a href="leaderboard.html"><button>LEADERBOARD</button></a>
+        <a href="leaderboard.php"><button>LEADERBOARD</button></a>
     </div>
 </body>
 
