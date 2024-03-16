@@ -9,6 +9,7 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElement = document.querySelector('[data-world]')
 const scoreElement = document.querySelector('[data-score]')
 const startScreenElement = document.querySelector('[data-start-screen]')
+const nameElement = document.querySelector('[data-name]');
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
@@ -19,6 +20,7 @@ let lastTime
 let speedScale
 let score
 let highScore
+let name
 
 function update(time) {
     if (lastTime == null) {

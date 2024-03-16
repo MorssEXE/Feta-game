@@ -24,11 +24,11 @@
         <?php
             $conn = mysqli_connect("localhost", "root", "", "fetadb");
 
-            $sql = "SELECT nickname, score from users";
+            $sql = "SELECT nickname, highScore from users";
             $result = $conn-> query($sql);
 
                 while ($row = $result-> fetch_assoc()) {
-                    echo "<tr><td>"."position" ."</td><td>". $row["nickname"] ."</td><td>". $row["score"] ."</td></tr>"; 
+                    echo "<tr><td>"."position" ."</td><td>". $row["nickname"] ."</td><td>". $row["highScore"] ."</td></tr>"; 
                 }
             $conn-> close();
         ?>

@@ -25,6 +25,13 @@ img {
   position: relative;
 }
 
+.name{
+  position: absolute;
+  font-size: 3vmin;
+  left: 1vmin;
+  top: 1vmin;
+}
+
 .score {
   position: absolute;
   font-size: 3vmin;
