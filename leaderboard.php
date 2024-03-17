@@ -1,17 +1,21 @@
+<?php
+$servername = "localhost";
+$username = "root";
+$password = "";
+$database = "fetadb";
+
+$conn = new mysqli($servername, $username, $password, $database);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feta | Leaderboard</title>
-    <style type ="text/css">
-        table{
-            border-collapse: collapse;
-            width: 100%;
-            font-size: 25px;
-            text-align: left;
-        }    
-    </style>
 </head>
 <body>
     <table>
@@ -22,15 +26,24 @@
             <th>Score</th>
         </tr>
         <?php
-            $conn = mysqli_connect("localhost", "root", "", "fetadb");
-
-            $sql = "SELECT nickname, highScore from users";
-            $result = $conn-> query($sql);
-
-                while ($row = $result-> fetch_assoc()) {
-                    echo "<tr><td>"."position" ."</td><td>". $row["nickname"] ."</td><td>". $row["highScore"] ."</td></tr>"; 
-                }
-            $conn-> close();
+         if ($conn->connect_error) { 
+            die("Connection failed: " . $conn->connect_error); 
+        } 
+         
+        $sql = "SELECT nickname, highScore FROM users ORDER BY highScore DESC LIMIT 10"; 
+        $result = $conn->query($sql); 
+         
+        $position = 1; 
+        if ($result->num_rows > 0) { 
+            while ($row = $result->fetch_assoc()) { 
+                echo "<tr><td>$position</td><td>" . htmlspecialchars($row["nickname"]) . "</td><td>" . htmlspecialchars($row["highScore"]) . "</td></tr>"; 
+                $position++; 
+            } 
+        } else { 
+            echo "<tr><td colspan='3'>No data available</td></tr>"; 
+        } 
+         
+        $conn->close(); 
         ?>
     </table>
     <a href="index.php"><button>back</button></a>
