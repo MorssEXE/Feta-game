@@ -9,18 +9,22 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElement = document.querySelector('[data-world]')
 const scoreElement = document.querySelector('[data-score]')
 const startScreenElement = document.querySelector('[data-start-screen]')
-const nameElement = document.querySelector('[data-name]');
+
 
 setPixelToWorldScale()
 window.addEventListener("resize", setPixelToWorldScale)
 document.addEventListener("mousedown", handleStart, {once: true})
 document.addEventListener("touchstart", handleStart, {once: true})
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+        window.location.href = "index.php";
+    }
+});
 
 let lastTime
 let speedScale
 let score
-let highScore
-let name
+let highScore = 0
 
 function update(time) {
     if (lastTime == null) {
@@ -56,6 +60,7 @@ function updateSpeedScale(delta) {
 
 function updateScore(delta) {
     score += delta * 0.01
+    highScore = Math.max(highScore, Math.floor(score));
     scoreElement.textContent = Math.floor(score)
 }
 
@@ -63,6 +68,7 @@ function handleStart() {
     lastTime = null
     speedScale = 1
     score = 0
+
     setupGround()
     setupMis()
     setupObstacles()
@@ -72,25 +78,34 @@ function handleStart() {
 
 function handleLose() {
     setMisLose()
-    highScore = Math.floor(score)
 
-    const xhr = new XMLHttpRequest();
-    xhr.open("POST", "index.php", true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                console.log(xhr.responseText);
-            } else {
-                console.error('Error:', xhr.status);
-            }
+    const nickname = document.querySelector('.name').textContent;
+    const formData = new FormData();
+    formData.append('nickname', nickname);
+    formData.append('highScore', highScore);
+    fetch('game.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
         }
-    };
-    xhr.send("highScore=" + highScore);
+        console.log('Data sent to server successfully');
+    })
+    .catch(error => {
+        console.error('Error sending data to server:', error);
+    });
+
 
     setTimeout(() => {
         document.addEventListener("mousedown", handleStart, { once: true })
         document.addEventListener("touchstart", handleStart, { once: true })
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                window.location.href = "index.php";
+            }
+        });
         startScreenElement.classList.remove("hide")
     }, 100)
 }

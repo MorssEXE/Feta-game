@@ -1,24 +1,12 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$database = "fetadb";
+session_start();
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nickname'])) {
+    $nickname = $_POST['nickname'];
+    $_SESSION['nickname'] = $nickname; // pouzivame session, protoze to bylo jedine co jsem nasel a fungovalo
+    header("Location: game.php");
+    exit();
 }
-
-$nickname = $_POST['nickname'];
-$highScore = $_POST['highScore'];
-
-$sql = "INSERT INTO users (nickname,highScore) VALUES ('$nickname','$highScore')";
-
-if ($conn->query($sql) === TRUE) {
-}
-
-$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -30,16 +18,14 @@ $conn->close();
     <title>Feta | Main</title>
     <link rel="stylesheet" href="mainstyles.css">
 </head>
-</head>
 
 <body>
     <div id="container">
         <h1>Feta</h1>
-        <form id="nicknameForm" method="post">
+        <form id="nicknameForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" name="nickname" placeholder="Enter your nickname" required><br>
-            <a href="index.html"><button type="submit">Submit!</button></a>
+            <button type="submit">Submit!</button>
         </form>
-        <a href="game.html"><button>Eat FETA</button></a>
         <a href="leaderboard.php"><button>LEADERBOARD</button></a>
     </div>
 </body>
