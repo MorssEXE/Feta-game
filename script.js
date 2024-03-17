@@ -79,7 +79,7 @@ function handleStart() {
 function handleLose() {
     setMisLose()
 
-    const nickname = document.querySelector('.name').textContent;
+    const nickname = document.querySelector('[data-name]').textContent;
     const formData = new FormData();
     formData.append('nickname', nickname);
     formData.append('highScore', highScore);
