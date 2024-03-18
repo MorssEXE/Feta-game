@@ -19,7 +19,7 @@ const OBSTACLES = {
         speed: 0.045,
         intervalMin: 2500,
         intervalMax: 5000,
-        image: "src/obstacle.png",
+        image: "src/spider.png",
         cssClass: "spider"
     }
 }
@@ -32,6 +32,7 @@ let nextObstacleTimeSpider
 export function setupObstacles() {
     nextObstacleTimeSkull = OBSTACLES.skull.intervalMin
     nextObstacleTimeBat = OBSTACLES.bat.intervalMin
+    nextObstacleTimeSpider = OBSTACLES.spider.intervalMin
     document.querySelectorAll("[data-obstacle]").forEach(obstacle => {
         obstacle.remove()
     })
