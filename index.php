@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nickname'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feta | Main</title>
-    <link rel="stylesheet" href="mainstyles.css">
+    <link rel="stylesheet" href="mainscreen.css">
 </head>
 
 <body>
@@ -24,7 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nickname'])) {
         <h1>Feta</h1>
         <form id="nicknameForm" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <input type="text" name="nickname" placeholder="Enter your nickname" required><br>
-            <button type="submit">Submit!</button>
+            <button type="submit">Play!</button>
         </form>
         <a href="leaderboard.php"><button>LEADERBOARD</button></a>
     </div>

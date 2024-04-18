@@ -28,8 +28,8 @@ img {
 .name {
   position: absolute;
   font-size: 5vmin;
-  left: 1vmin;
-  top: 1vmin;
+  left: 50;
+  top: 5vmin;
 }
 
 .score {
@@ -53,7 +53,7 @@ img {
 
 .ground {
   position: absolute;
-  width: 300%;
+  width: 200%;
   bottom: 0;
   left: calc(var(--left) * 1%);
 }

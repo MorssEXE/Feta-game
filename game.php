@@ -16,16 +16,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nickname'])) {
     $nickname = $_POST['nickname'];
     $highScore = $_POST['highScore'];
 
-    $sql = "INSERT INTO users (nickname, highScore) VALUES ('$nickname', '$highScore')";
+    $checkQuery = "SELECT highScore FROM users WHERE nickname = '$nickname'";
+    $checkResult = $conn->query($checkQuery);
 
-    if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+    if ($checkResult->num_rows > 0) {
+        $row = $checkResult->fetch_assoc();
+        $existingHighScore = $row["highScore"];
+
+        if ($highScore > $existingHighScore) {
+            $updateQuery = "UPDATE users SET highScore = $highScore WHERE nickname = '$nickname'";
+            if ($conn->query($updateQuery) === TRUE) {
+                echo "Record updated successfully";
+            } else {
+                echo "Error updating record: " . $conn->error;
+            }
+        } else {
+            echo "Score not higher than existing score, not updated";
+        }
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        $insertQuery = "INSERT INTO users (nickname, highScore) VALUES ('$nickname', '$highScore')";
+        if ($conn->query($insertQuery) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $insertQuery . "<br>" . $conn->error;
+        }
     }
 
     $conn->close();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nickname'])) {
 </head>
 
 <body>
+    <div class="name" data-name><?php echo isset($_SESSION['nickname']) ? $_SESSION['nickname'] : "Name" ?></div>
     <div class="world" data-world>
-        <div class="name" data-name><?php echo isset($_SESSION['nickname']) ? $_SESSION['nickname'] : "Name" ?></div>
         <div class="score" data-score>0</div>
         <div class="start-screen" data-start-screen>Press LMB to start</div>
         <img src="src/ground.png" class="ground" data-ground>
